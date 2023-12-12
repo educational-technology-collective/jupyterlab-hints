@@ -7,9 +7,9 @@ has_binder: false
 has_settings: true
 kind: frontend
 labextension_name: jupyterlab-hints
-project_short_description: A JupyterLab extension for creating a blur effect on specified
-    cells.
+project_short_description:
+  A JupyterLab extension for creating a blur effect on specified
+  cells.
 python_name: jupyterlab_hints
 repository: https://github.com/educational-technology-collective/jupyterlab-hints
 test: false
-
