@@ -1,6 +1,11 @@
 import { NotebookPanel } from '@jupyterlab/notebook';
+import { ISettingRegistry } from '@jupyterlab/settingregistry';
 
-export const addHintOverlay = (i: number, notebookPanel: NotebookPanel) => {
+export const addHintOverlay = (
+  i: number,
+  notebookPanel: NotebookPanel,
+  settings: ISettingRegistry.ISettings
+) => {
   const cell = notebookPanel.content.model?.cells.get(i);
   const cellWidget = notebookPanel.content.widgets.find(
     widget => widget.model === cell
@@ -9,13 +14,20 @@ export const addHintOverlay = (i: number, notebookPanel: NotebookPanel) => {
     // Create hint blur overlay and append to hint cell node
     const overlay = document.createElement('div');
     overlay.classList.add('hint-overlay');
-    overlay.innerText = 'Click to reveal hint';
     cellWidget.node.appendChild(overlay);
 
     // Create modal to confirm if user wants to reveal hint
     const modal = document.createElement('div');
     modal.classList.add('hint-modal');
-    modal.innerText = 'Are you sure you want to reveal the hint?';
+
+    const updateSettings = (): void => {
+      overlay.innerText = settings.get('text1').composite as string;
+      modal.innerText = settings.get('text2').composite as string;
+      const blurryLevel = settings.get('blurry-level').composite as number;
+      overlay.style.backdropFilter = `blur(${blurryLevel}px)`;
+    };
+    updateSettings();
+    settings.changed.connect(updateSettings);
 
     // Remove overlay text and append modal when user clicks on overlay
     overlay.addEventListener('click', () => {

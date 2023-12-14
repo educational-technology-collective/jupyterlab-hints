@@ -3,6 +3,25 @@
   "title": "jupyterlab-hints",
   "description": "jupyterlab-hints settings.",
   "type": "object",
-  "properties": {},
+  "properties": {
+    "text1": {
+      "type": "string",
+      "title": "Text 1",
+      "description": "Text displayed before click hint",
+      "default": "Click to reveal a hint"
+    },
+    "text2": {
+      "type": "string",
+      "title": "Text 2",
+      "description": "Text displayed confirming click hint",
+      "default": "Are you sure you want to reveal the hint?"
+    },
+    "blurry-level": {
+      "type": "number",
+      "title": "Blurry Level",
+      "description": "The blurry level of the hint",
+      "default": 3
+    }
+  },
   "additionalProperties": false
 }

@@ -20,33 +20,22 @@ const plugin: JupyterFrontEndPlugin<void> = {
     console.log('JupyterLab extension jupyterlab-hints is activated!');
 
     if (settingRegistry) {
-      settingRegistry
-        .load(plugin.id)
-        .then(settings => {
-          console.log('jupyterlab-hints settings loaded:', settings.composite);
-        })
-        .catch(reason => {
-          console.error(
-            'Failed to load settings for jupyterlab-hints.',
-            reason
-          );
-        });
-    }
+      const setting = await settingRegistry.load(plugin.id);
+      notebookTracker.widgetAdded.connect(
+        async (_, notebookPanel: NotebookPanel) => {
+          await notebookPanel.revealed;
 
-    notebookTracker.widgetAdded.connect(
-      async (_, notebookPanel: NotebookPanel) => {
-        await notebookPanel.revealed;
-
-        if (notebookPanel.content.model) {
-          const cells = notebookPanel.content.model?.cells;
-          for (let i = 0; i < cells.length; i++) {
-            if (cells.get(i).metadata.hint) {
-              addHintOverlay(i, notebookPanel);
+          if (notebookPanel.content.model) {
+            const cells = notebookPanel.content.model?.cells;
+            for (let i = 0; i < cells.length; i++) {
+              if (cells.get(i).metadata.hint) {
+                addHintOverlay(i, notebookPanel, setting);
+              }
             }
           }
         }
-      }
-    );
+      );
+    }
   }
 };
 
