@@ -17,8 +17,6 @@ const plugin: JupyterFrontEndPlugin<void> = {
     notebookTracker: INotebookTracker,
     settingRegistry: ISettingRegistry | null
   ) => {
-    console.log('JupyterLab extension jupyterlab-hints is activated!');
-
     if (settingRegistry) {
       const setting = await settingRegistry.load(plugin.id);
       notebookTracker.widgetAdded.connect(
