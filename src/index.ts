@@ -4,6 +4,7 @@ import {
 } from '@jupyterlab/application';
 import { INotebookTracker, NotebookPanel } from '@jupyterlab/notebook';
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
+import { IJupyterLabPioneer } from 'jupyterlab-pioneer';
 import { addHintOverlay } from './utils';
 
 const plugin: JupyterFrontEndPlugin<void> = {
@@ -11,10 +12,12 @@ const plugin: JupyterFrontEndPlugin<void> = {
   description:
     'A JupyterLab extension for creating a blur effect on specified cells.',
   autoStart: true,
-  optional: [INotebookTracker, ISettingRegistry],
+  requires: [INotebookTracker, IJupyterLabPioneer],
+  optional: [ISettingRegistry],
   activate: async (
     app: JupyterFrontEnd,
     notebookTracker: INotebookTracker,
+    pioneer: IJupyterLabPioneer,
     settingRegistry: ISettingRegistry | null
   ) => {
     if (settingRegistry) {
@@ -27,7 +30,7 @@ const plugin: JupyterFrontEndPlugin<void> = {
             const cells = notebookPanel.content.model?.cells;
             for (let i = 0; i < cells.length; i++) {
               if (cells.get(i).metadata.hint) {
-                addHintOverlay(i, notebookPanel, setting);
+                addHintOverlay(i, notebookPanel, setting, pioneer);
               }
             }
           }

@@ -702,7 +702,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jupyterlab/coreutils@npm:^6.0.9":
+"@jupyterlab/coreutils@npm:^6.0.0, @jupyterlab/coreutils@npm:^6.0.9":
   version: 6.0.9
   resolution: "@jupyterlab/coreutils@npm:6.0.9"
   dependencies:
@@ -840,7 +840,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jupyterlab/notebook@npm:^4.0.9":
+"@jupyterlab/notebook@npm:^4.0.5, @jupyterlab/notebook@npm:^4.0.9":
   version: 4.0.9
   resolution: "@jupyterlab/notebook@npm:4.0.9"
   dependencies:
@@ -941,7 +941,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jupyterlab/services@npm:^7.0.9":
+"@jupyterlab/services@npm:^7.0.0, @jupyterlab/services@npm:^7.0.9":
   version: 7.0.9
   resolution: "@jupyterlab/services@npm:7.0.9"
   dependencies:
@@ -4042,6 +4042,7 @@ __metadata:
     eslint: ^8.36.0
     eslint-config-prettier: ^8.8.0
     eslint-plugin-prettier: ^5.0.0
+    jupyterlab-pioneer: ^0.1.11
     npm-run-all: ^4.1.5
     prettier: ^3.0.0
     rimraf: ^5.0.1
@@ -4056,6 +4057,18 @@ __metadata:
     yjs: ^13.5.0
   languageName: unknown
   linkType: soft
+
+"jupyterlab-pioneer@npm:^0.1.11":
+  version: 0.1.11
+  resolution: "jupyterlab-pioneer@npm:0.1.11"
+  dependencies:
+    "@jupyterlab/application": ^4.0.0
+    "@jupyterlab/coreutils": ^6.0.0
+    "@jupyterlab/notebook": ^4.0.5
+    "@jupyterlab/services": ^7.0.0
+  checksum: eb6884ec1d0e44c347b0f4cc1833ebcef613591534b7b7397d0f8976f2d921a715baae0bc65f5d308df754e2c055816486dca6e01b4c54becc97bb2b9ac65e88
+  languageName: node
+  linkType: hard
 
 "keyv@npm:^4.5.3":
   version: 4.5.4

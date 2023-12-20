@@ -57,7 +57,8 @@
     "dependencies": {
         "@jupyterlab/application": "^4.0.0",
         "@jupyterlab/notebook": "^4.0.9",
-        "@jupyterlab/settingregistry": "^4.0.0"
+        "@jupyterlab/settingregistry": "^4.0.0",
+        "jupyterlab-pioneer": "^0.1.11"
     },
     "devDependencies": {
         "@jupyterlab/builder": "^4.0.0",
@@ -94,7 +95,14 @@
     "jupyterlab": {
         "extension": true,
         "outputDir": "jupyterlab_hints/labextension",
-        "schemaDir": "schema"
+        "schemaDir": "schema",
+        "sharedPackages": {
+            "jupyterlab-pioneer": {
+                "bundled": false,
+                "singleton": true,
+                "strictVersion": true
+            }
+        }
     },
     "eslintIgnore": [
         "node_modules",

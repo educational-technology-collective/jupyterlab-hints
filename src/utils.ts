@@ -1,10 +1,12 @@
 import { NotebookPanel } from '@jupyterlab/notebook';
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
+import { IJupyterLabPioneer } from 'jupyterlab-pioneer';
 
 export const addHintOverlay = (
   i: number,
   notebookPanel: NotebookPanel,
-  settings: ISettingRegistry.ISettings
+  settings: ISettingRegistry.ISettings,
+  pioneer: IJupyterLabPioneer
 ) => {
   const cell = notebookPanel.content.model?.cells.get(i);
   const cellWidget = notebookPanel.content.widgets.find(
@@ -36,11 +38,27 @@ export const addHintOverlay = (
     });
 
     // Set cell metadata to revealed and remove overlay and modal and save the notebook
+    const exporters = notebookPanel.content.model?.getMetadata('exporters');
+
     modal.addEventListener('click', () => {
       modal.innerText = '';
       overlay.classList.remove('hint-overlay');
       modal.classList.remove('hint-modal');
       cell.setMetadata('hint', false);
+
+      const event = {
+        eventName: 'HintRevealedEvent',
+        eventTime: Date.now(),
+        eventInfo: {
+          cell: {
+            id: cell.id,
+            index: i
+          }
+        }
+      };
+      exporters?.forEach(async (exporter: any) => {
+        await pioneer.publishEvent(notebookPanel, event, exporter, false);
+      });
     });
   }
 };
